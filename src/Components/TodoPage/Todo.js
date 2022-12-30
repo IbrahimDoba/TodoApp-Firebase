@@ -124,12 +124,7 @@ export const Todo = () => {
     await getUser();
   };
 
-  // const updateUser = async (id,todo, TodoText) =>{
-  //   const userDoc = doc(db, 'User', id);
-  //   const newFields = {}
-  //   console.log('testing edit', newFields)
-  //   await updateDoc(userDoc , newFields)
-  // }
+
 
   const getUser = async () => {
     const usersCollectionRef = collection(db, "User");
