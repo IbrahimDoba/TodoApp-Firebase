@@ -8,7 +8,6 @@ export const TodoListContainer = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-
 `;
 
 export const TodoWrap = styled.div`
@@ -24,7 +23,6 @@ export const TodoWrap = styled.div`
   text-decoration: ${({ toggleComplete }) =>
     toggleComplete ? "line-through" : "none"};
 
-
   & .Todo-icon {
     padding-right: 20px;
     border: none;
@@ -38,8 +36,7 @@ export const Todobtn = styled.div`
 
 export const TodoListLi = styled.li`
   list-style: none;
-  width:80%;
-
+  width: 80%;
 `;
 
 export const TodoCompleteBtn = styled.button`
@@ -54,10 +51,8 @@ export const DeleteBtn = styled.div`
   align-items: flex-end;
   justify-content: flex-end;
   width: 80%;
- 
 `;
 export const DeleteIcon = styled(AiFillDelete)`
-
   cursor: pointer;
   color: #000;
 `;

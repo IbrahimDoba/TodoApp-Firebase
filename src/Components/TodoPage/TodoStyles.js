@@ -21,8 +21,7 @@ export const TodoWrapper = styled.div`
   /* border: 3px solid green; */
   border-radius: 20px 20px 0 0;
   flex-basis: 100%;
-  box-shadow: 5px 6px #E1E0E0;
-
+  box-shadow: 5px 6px #e1e0e0;
 `;
 
 export const TodoTopDiv = styled.div`
@@ -84,14 +83,12 @@ export const TodoListContainerLi = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-
 `;
 
 export const DeleteEditbtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
 `;
 
 export const EditTodo = styled.button`
@@ -122,14 +119,7 @@ export const TodoInput = styled.div`
   }
 `;
 
-export const DeleteTodo = styled.p`
-  /* background: #fff;
-  color: #000;
-  border-radius: 50px;
-  padding: 12px;
-  cursor: pointer;
-  font-size: 15px; */
-`;
+export const DeleteTodo = styled.p``;
 export const TodoSubmitBtn = styled.button`
   background: #fff;
   color: #000;

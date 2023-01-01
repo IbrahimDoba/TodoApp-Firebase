@@ -24,7 +24,6 @@ import {
   TodoInput,
   TodoUsername,
   TodoTopRow,
- 
   TodoListContainerLi,
 } from "./TodoStyles";
 import { IconContext } from "react-icons/lib";
@@ -100,7 +99,6 @@ export const Todo = () => {
     await getUser();
   }
 
- 
   const createUser = async (e) => {
     e.preventDefault(e);
     if (TodoText === "") {
@@ -113,8 +111,8 @@ export const Todo = () => {
       completed: false,
       email: email,
     });
-    await getUser()
-    SetTodoText('')
+    await getUser();
+    SetTodoText("");
     console.log("testingaddtodo");
   };
 
@@ -123,8 +121,6 @@ export const Todo = () => {
     await deleteDoc(doc(db, "User", id));
     await getUser();
   };
-
-
 
   const getUser = async () => {
     const usersCollectionRef = collection(db, "User");
@@ -147,8 +143,6 @@ export const Todo = () => {
     });
 
     // Todo backend using firebase (Useeffect)
-
-   
 
     if (Usertodos) {
       const filtered = Usertodos.filter((Usertodo) => {
@@ -177,7 +171,7 @@ export const Todo = () => {
             <TodoUsername>
               Welcome! {user && <div className="username">{user.name}</div>}{" "}
             </TodoUsername>
-           
+
             <div id="Sign-in"></div>
 
             {Object.keys(user).length !== 0 && (
@@ -227,4 +221,3 @@ export const Todo = () => {
 };
 
 export default Todo;
-
