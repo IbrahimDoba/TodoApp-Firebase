@@ -1,5 +1,4 @@
 import React from "react";
-import { useReducer } from "react";
 import { useState, useEffect } from "react";
 import TodoList from "./TodoList";
 import jwtDecode from "jwt-decode";
@@ -27,9 +26,8 @@ import {
   TodoListContainerLi,
 } from "./TodoStyles";
 import { IconContext } from "react-icons/lib";
-import { REDUCER_STATE } from "../Reducers/FormReducer";
 
-// Todo form using reducer
+// Todo form using usestate
 
 export const Todo = () => {
   const [TodoText, SetTodoText] = useState("");
@@ -38,52 +36,8 @@ export const Todo = () => {
   const [uniqueUser, setUniqueUser] = useState([]);
   const [Usertodos, SetUserTodos] = useState([]);
 
-  const newTodo = (TodoText, email) => {
-    return {
-      id: Date.now(),
-      TodoText: TodoText,
-      completed: false,
-      email: email,
-    };
-  };
-  const reducer = (todos, action) => {
-    switch (action.type) {
-      case REDUCER_STATE.ADD_TODO:
-        return [
-          ...todos,
-          newTodo(action.payload.TodoText, action.payload.email),
-        ];
-      case REDUCER_STATE.TOGGLE_TODO:
-        return Usertodos.map((Usertodo) => {
-          if (Usertodo.id === action.payload.id) {
-            return {
-              ...Usertodo,
-              id: Usertodo.id,
-              completed: !Usertodo.completed,
-            };
-          }
-          return { ...Usertodo };
-        });
-      default:
-        return todos;
-    }
-  };
-
-  const [todos, dispatch] = useReducer(reducer, []);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch({
-  //     type: REDUCER_STATE.ADD_TODO,
-  //     payload: { TodoText: TodoText, email: email },
-  //   });
-  //   console.log(todos);
-  //   createUser();
-  //   SetTodoText("");
-  // };
-
   // Todo Google auth
-
+  /* global google */
   function handleSignOut(e) {
     SetUser({});
     document.getElementById("Sign-in").hidden = false;
@@ -98,6 +52,11 @@ export const Todo = () => {
     SetUser(userObject);
     await getUser();
   }
+  google.accounts.id.initialize({
+    client_id:
+      "278289515312-jebmsecssi6m6uvah8t6m1djddfigr9r.apps.googleusercontent.com",
+    callback: handleCallbackResponse,
+  });
 
   const createUser = async (e) => {
     e.preventDefault(e);
@@ -105,6 +64,9 @@ export const Todo = () => {
       alert("Please enter a valid todo!");
       return;
     }
+
+    // Todo backend using firebase
+
     await addDoc(collection(db, "User"), {
       id: Date.now(),
       TodoText: TodoText,
@@ -130,19 +92,10 @@ export const Todo = () => {
   };
 
   useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id:
-        "278289515312-jebmsecssi6m6uvah8t6m1djddfigr9r.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-
     google.accounts.id.renderButton(document.getElementById("Sign-in"), {
       theme: "outline",
       size: "large",
     });
-
-    // Todo backend using firebase (Useeffect)
 
     if (Usertodos) {
       const filtered = Usertodos.filter((Usertodo) => {
@@ -160,8 +113,6 @@ export const Todo = () => {
     console.log("works", toggleComplete);
     getUser();
   };
-
-  // Todo backend using firebase
 
   return (
     <TodoContainer>
@@ -207,7 +158,6 @@ export const Todo = () => {
                       key={id}
                       Usertodo={Usertodo}
                       toggleComplete={toggleComplete}
-                      dispatch={dispatch}
                       deleteUser={deleteUser}
                     />
                   );
